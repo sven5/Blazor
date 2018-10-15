@@ -1,0 +1,34 @@
+﻿@using HelloWorldDragDrop.App.Services
+@page "/dragdrop"
+
+<h1>Drag and Drop example with Blazor</h1>
+
+<p>This component demonstrates drag and drop.</p>
+<p>Just move the items from the left container to the right.</p>
+
+<div class="row">
+    @for (int i = 1; i <= _numberOfContainers; i++)
+    {
+        <div class="col-sm-3 border pt-2" style="background-color: antiquewhite">
+            <h5>Container @i</h5>
+        </div>
+    }
+</div>
+<div class="row" style="min-height:450px;">
+    @for (int i = 1; i <= _numberOfContainers; i++)
+    {
+        <DragDropContainer Index="@i" RefreshHandler="@Refresh" />
+    }
+</div>
+
+@functions {
+    private int _numberOfContainers = 2;
+
+    /// <summary>
+    /// This refresh handler is needed to trigger a reload from the children
+    /// </summary>
+    void Refresh()
+    {
+        StateHasChanged();
+    }
+}

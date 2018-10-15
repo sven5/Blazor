@@ -1,0 +1,50 @@
+﻿@using Services
+
+<div class="col-sm-3 border" dropzone="move" ondragenter="@(e => OnContainerDragEnter(e))" 
+    ondragover="event.preventDefault();" ondragleave="@(e => OnContainerDragLeave(e))" 
+    ondrop="@(e => OnContainerDrop(e, Index))" style="@_highlightDropTargetStyle">
+    @foreach (var item in DragDropHelper.Items.Where(item => item.Index == Index))
+    {
+        <div draggable="true" class="bm-3" ondragstart="@(e => OnItemDragStart(e, item))">
+            <DataItem Model="@item" />
+        </div>
+    }
+</div>
+
+@functions {
+
+    /// <summary>
+    /// The refresh handler from the parent
+    /// </summary>
+    [Parameter]
+    Action RefreshHandler { get; set; }
+
+    [Parameter]
+    private int Index { get; set; }
+
+    string _highlightDropTargetStyle = null;
+
+    void OnItemDragStart(UIDragEventArgs e, DragItem dragItem)
+    {
+        DragDropHelper.Item = dragItem;
+    }
+
+    void OnContainerDragEnter(UIDragEventArgs e)
+    {
+        _highlightDropTargetStyle = "border:5px dashed salmon !important";
+    }
+
+    void OnContainerDragLeave(UIDragEventArgs e)
+    {
+        _highlightDropTargetStyle = null;
+    }
+
+    void OnContainerDrop(UIDragEventArgs e, int newIndex)
+    {
+        _highlightDropTargetStyle = null;
+        // set the model value here to the new index
+        // in real-world you would save the changes by injected service to the database
+        DragDropHelper.Item.Index = newIndex;
+        RefreshHandler();
+    }
+}
