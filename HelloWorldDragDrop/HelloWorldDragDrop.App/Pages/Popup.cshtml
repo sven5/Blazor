@@ -1,0 +1,25 @@
+﻿@page "/popup"
+
+<h1>Popup example with Blazor</h1>
+
+<p>This component demonstrates howto open and close a Bootstrap popup.</p>
+<p>A fade animation can be used to smoothly open the popup.</p>
+
+<div class="row mb-3">
+    <div class="col-1">
+        <button type="button" class="btn btn-primary" onclick="@(e => OpenPopup())"><span class="oi oi-plus"></span> Open Popup</button>
+    </div>
+</div>
+
+<PopupComponent ref="_popup" Animation="PopupComponent.AnimationType.FadeIn" Title="A Popup Demo Title" />
+
+@functions{
+
+    PopupComponent _popup;
+
+    void OpenPopup()
+    {
+        _popup.Open();
+        StateHasChanged();
+    }
+}

@@ -15,7 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Pages\Popup.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Pages\DragDrop.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Shared\PopupComponent.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Shared\DragDropContainer.cshtml">

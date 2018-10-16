@@ -1,0 +1,127 @@
+﻿@using Services
+
+@if (IsPopupOpen)
+{
+<style>
+        div.overlay {
+            opacity: @(_overlayOpacity.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            background: #000;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            position: fixed;
+        }
+</style>
+<div class="overlay"></div>
+<div class="modal" tabindex="-1" role="dialog" style="display:block;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="@Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group has-danger">
+                                <label class="col-form-label" for="@nameof(DataItem.Text)">Demo Text</label>
+                                <input required type="text" id="@nameof(DataItem.Text)" class="form-control" aria-label="Text" bind="@DataItem.Text" placeholder="Enter some text..." />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group has-danger">
+                                <label class="col-form-label" for="@nameof(DataItem.Description)">Description</label>
+                                <input type="text" id="@nameof(DataItem.Description)" class="form-control" aria-label="Text" bind="@DataItem.Description" placeholder="Enter a comment..." />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="@Save">Save</button>
+                <button type="button" class="btn btn-secondary" onclick="@Close">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+@functions {
+    string ex = string.Empty;
+
+    double _overlayOpacity = 0.0;
+
+    private bool _isPopupOpen;
+
+    public enum AnimationType
+    {
+        None = 0,
+        FadeIn = 1
+    }
+
+    [Parameter]
+    string Title { get; set; }
+
+    [Parameter]
+    private AnimationType Animation { get; set; }
+
+    [Parameter]
+    DragItem DataItem { get; set; } = new DragItem();
+
+    bool IsPopupOpen
+    {
+        get
+        {
+            return _isPopupOpen;
+        }
+        set
+        {
+            _isPopupOpen = value;
+            if (_isPopupOpen)
+            {
+                FadeIn();
+            }
+        }
+    }
+
+    private async void FadeIn()
+    {
+        if (Animation == AnimationType.FadeIn)
+        {
+            await Task.Run(async () =>
+            {
+                for (double i = 0.0; i <= 0.5; i += 0.1)
+                {
+                    _overlayOpacity = i;
+                    StateHasChanged();
+                    await Task.Delay(30);
+                }
+            });
+        }
+    }
+
+    void Save()
+    {
+        // you can add some code for validation and saving the modifications here...
+        // ....
+        // Close the popup
+        IsPopupOpen = false;
+    }
+
+    public void Open()
+    {
+        IsPopupOpen = true;
+    }
+
+    public void Close()
+    {
+        IsPopupOpen = false;
+    }
+}
