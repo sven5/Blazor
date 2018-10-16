@@ -1,5 +1,4 @@
-# Drag and Drop
-
+# Blazor Examples
 This example shows how to implement some features in a Blazor App:
 
 * use HTML5 Drag an drop
