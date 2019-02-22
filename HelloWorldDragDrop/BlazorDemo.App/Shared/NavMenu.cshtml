@@ -7,19 +7,24 @@
 
 <div class=@(collapseNavMenu ? "collapse" : null) onclick=@ToggleNavMenu>
     <ul class="nav flex-column">
-        <li class="nav-item px-3">
+        <li class="nav-item">
             <NavLink class="nav-link" href="" Match=NavLinkMatch.All>
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </li>
-        <li class="nav-item px-3">
+        <li class="nav-item">
             <NavLink class="nav-link" href="popup">
                 <span class="oi oi-grid-three-up" aria-hidden="true"></span> Bootstrap Popup
             </NavLink>
         </li>
-        <li class="nav-item px-3">
+        <li class="nav-item">
             <NavLink class="nav-link" href="dragdrop">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Drag and Drop
+            </NavLink>
+        </li>
+        <li class="nav-item">
+            <NavLink class="nav-link" href="selectbox">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> DevExtreme DxSelectBox
             </NavLink>
         </li>
     </ul>

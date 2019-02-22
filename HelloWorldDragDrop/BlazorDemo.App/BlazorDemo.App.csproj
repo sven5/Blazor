@@ -16,6 +16,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="BlazorDevExtreme">
+      <HintPath>..\lib\BlazorDevExtreme.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Pages\SelectBox.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Pages\Popup.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

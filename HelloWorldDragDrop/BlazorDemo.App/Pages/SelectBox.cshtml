@@ -1,0 +1,93 @@
+﻿@page "/selectbox"
+@using  BlazorDemo.Model
+
+<h1>DevExtreme SelectBox</h1>
+
+<p>This demo shows the integration of DevExtreme DxSelectBox in a Blazor app.</p>
+<p>Thanks to MihaMarkic who developed the DevExtreme Blazor interop, see <a href="https://github.com/MihaMarkic/BlazorDevExtreme">https://github.com/MihaMarkic/BlazorDevExtreme</a></p>
+<p>However, some additional changes were necessary to get things working (i.e. data-binding), found in my updated repo here: <a href="https://github.com/sven5/BlazorDevExtreme">https://github.com/sven5/BlazorDevExtreme</a></p>
+<p>For convenience I referenced this library as a direct assembly reference to this solution.</p>
+
+<div class="row mb-3">
+    <div class="col-4">
+        <label>Simple DxSelectBox</label>
+        @* To get Blazor data-binding to work you must use the same name for the dxSelectBox widget and its inner input element*@
+        <DxSelectBox DataSource="@_dataList1" DisplayExpr="@("Name")" ValueExpr="@("Id")" bind-Value="@_selectedCustomerNumber1"
+                     OnValueChangedEnabled="true" Name="selectBox1" InputAttr="@(new { id = "selectBox1" })" />
+        <div>You selected customer number: @_selectedCustomerNumber1</div>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-4 pt-3">
+        <label>DxSelectBox with paging bound to a large amount of data</label>
+        @* To get Blazor data-binding to work you must use the same name for the dxSelectBox widget and its inner input element*@
+        <DxSelectBox DataSource="@_dataSource2" DisplayExpr="@("Name")" ValueExpr="@("Id")" bind-Value="@_selectedCustomerNumber2"
+                     OnValueChangedEnabled="true" Name="selectBox2" InputAttr="@(new { id = "selectBox2" })" />
+        <div>You selected customer number: @_selectedCustomerNumber2</div>
+    </div>
+</div>
+
+@functions{
+
+    string _selectedCustomerNumber1;
+
+    string _selectedCustomerNumber2;
+
+    object _dataSource2;
+
+    private List<Customer> _dataList2 = new List<Customer>();
+
+    private IReadOnlyList<Customer> _dataList1 = new List<Customer>
+{
+        new Customer { Id = "1", Name = "John Doe" },
+        new Customer { Id = "2", Name = "Alex Doe" },
+        new Customer { Id = "3", Name = "Jane Miller" },
+    };
+
+    protected override void OnInit()
+    {
+        // attach to generic valueChanged event
+        // this is only necessary to show the selected value
+        DevExpress.Ui.EditorInterop.ValueChanged += ValueChanged;
+        // Load data for 2nd SelectBox
+        LoadCustomers();
+        _dataSource2 = new
+        {
+            paginate = true,
+            store = new
+            {
+                type = "array",
+                data = _dataList2,
+                key = nameof(Customer.Id)
+            }
+        };
+    }
+
+    private void LoadCustomers()
+    {
+        for (int i = 0; i < 10000; i++)
+        {
+            var customer = new Customer
+            {
+                Id = i.ToString(),
+                Name = $"Test Customer {i}"
+            };
+            _dataList2.Add(customer);
+        }
+    }
+
+    /// <summary>
+    /// This is only needed to call StateHasChanged to inform Blazor about a DOM refresh
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    void ValueChanged(object sender, (JQueryEventArgs e, string value) args)
+    {
+        // a trick to get the UI updated
+        InvokeAsync(async () =>
+        {
+            await Task.Delay(1);
+            StateHasChanged();
+        });
+    }
+}
