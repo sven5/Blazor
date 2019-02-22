@@ -1,8 +1,10 @@
 ﻿namespace BlazorDemo.App.Services
 {
-    public static class DragDropHelper
+    public class DragDropHelper
     {
-        public static DragItem[] Items = new[]
+        public DragItem Item { get; set; }
+
+        public DragItem[] Items = new[]
         {
             new DragItem
             {
@@ -17,7 +19,5 @@
                 Index  = 1
             }
         };
-
-        public static DragItem Item { get; set; }
     }
 }

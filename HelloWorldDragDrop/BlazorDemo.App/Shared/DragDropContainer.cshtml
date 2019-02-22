@@ -1,5 +1,5 @@
 ﻿@using BlazorDemo.App.Services
-
+@inject DragDropHelper  DragDropHelper
 <div class="col-sm-3 border" dropzone="move" ondragenter="@(e => OnContainerDragEnter(e))"
      ondragover="event.preventDefault();" ondragleave="@(e => OnContainerDragLeave(e))"
      ondrop="@(e => OnContainerDrop(e, Index))" style="@_highlightDropTargetStyle">
@@ -7,7 +7,6 @@
     {
         <div draggable="true" class="bm-3" ondragstart="@(e => OnItemDragStart(e, item))">
             <DataItem Model="@item" />
-
         </div>
     }
 </div>
@@ -25,9 +24,8 @@
 
     string _highlightDropTargetStyle = null;
 
-    async void OnItemDragStart(UIDragEventArgs e, DragItem dragItem)
+    void OnItemDragStart(UIDragEventArgs e, DragItem dragItem)
     {
-        //var result = await JSRuntime.Current.InvokeAsync<string>("interopFunctions.setTransferData", e);
         DragDropHelper.Item = dragItem;
     }
 
@@ -44,8 +42,6 @@
     void OnContainerDrop(UIDragEventArgs e, int newIndex)
     {
         _highlightDropTargetStyle = null;
-        // set the model value here to the new index
-        // in real-world you would save the changes by injected service to the database
         DragDropHelper.Item.Index = newIndex;
         RefreshHandler();
     }

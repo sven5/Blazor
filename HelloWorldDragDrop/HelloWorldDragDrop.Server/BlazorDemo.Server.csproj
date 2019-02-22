@@ -8,12 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="0.8.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Server" Version="3.0.0-preview-19075-0444" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="0.8.0-preview-19104-04" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HelloWorldDragDrop.App\BlazorDemo.App.csproj" />
+    <ProjectReference Include="..\BlazorDemo.App\BlazorDemo.App.csproj" />
   </ItemGroup>
 
 </Project>

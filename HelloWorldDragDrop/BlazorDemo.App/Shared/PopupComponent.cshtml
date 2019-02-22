@@ -1,5 +1,5 @@
 ﻿@inherits ComponentBase
-
+@using BlazorDemo.App.Services
 @if (IsPopupOpen)
 {
     <style>
@@ -96,7 +96,7 @@
     {
         if (Animation == AnimationType.FadeIn)
         {
-            await Task.Run(async () =>
+            await InvokeAsync(async () =>
             {
                 for (double i = 0.0; i <= 0.5; i += 0.1)
                 {

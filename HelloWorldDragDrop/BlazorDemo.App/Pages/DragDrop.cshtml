@@ -1,15 +1,21 @@
-﻿@using HelloWorldDragDrop.App.Services
+﻿@using BlazorDemo.App.Services
+
 @page "/dragdrop"
 
 <h1>Drag and Drop example with Blazor</h1>
 
-<p>This component demonstrates drag and drop.</p>
-<p>Just move the items from the left container to the right.</p>
+<div class="row">
+    <div class="col-5">
+        <p>This component demonstrates drag and drop.</p>
+        <p>Just move the items from the left container to the right.</p>
+        <p class="alert alert-warning">Currently, this doesn't work with FireFox due to a limitation in Blazor.</p>
+    </div>
+</div>
 
 <div class="row">
     @for (int i = 1; i <= _numberOfContainers; i++)
     {
-        <div class="col-sm-3 border pt-2" style="background-color: antiquewhite">
+        <div class="col-3 border pt-2" style="background-color: antiquewhite">
             <h5>Container @i</h5>
         </div>
     }

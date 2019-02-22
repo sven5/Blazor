@@ -1,11 +1,11 @@
 ﻿@inherits ComponentBase
 
-@using BlazorDemo.Services
+@using BlazorDemo.App.Services
 
 <div class="alert alert-primary mt-4" role="alert">
     <strong>@Model.Text</strong>
     <span class="text-nowrap">
-        @Model.Description
+        @Model.Description (Index: @Model.Index)
     </span>
 </div>
 
