@@ -11,15 +11,15 @@
     </div>
 </div>
 
-<PopupComponent ref="_popup" Animation="PopupComponent.AnimationType.FadeIn" Title="A Popup Demo Title" />
+<PopupComponent Animation="PopupComponent.AnimationType.FadeIn" Title="A Popup Demo Title" />
 
 @functions{
 
-    PopupComponent _popup;
+    //PopupComponent _popup;
 
     void OpenPopup()
     {
-        _popup.Open();
+        //_popup.Open();
         StateHasChanged();
     }
 }

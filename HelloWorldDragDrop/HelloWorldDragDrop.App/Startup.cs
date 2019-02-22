@@ -1,8 +1,7 @@
-using Microsoft.AspNetCore.Blazor.Builder;
+using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using HelloWorldDragDrop.App.Services;
 
-namespace HelloWorldDragDrop.App
+namespace BlazorDemo.App
 {
     public class Startup
     {
@@ -10,10 +9,10 @@ namespace HelloWorldDragDrop.App
         {
             // Since Blazor is running on the server, we can use an application service
             // to read the forecast data.
-            services.AddSingleton<WeatherForecastService>();
+            //services.AddSingleton<WeatherForecastService>();
         }
 
-        public void Configure(IBlazorApplicationBuilder app)
+        public void Configure(IComponentsApplicationBuilder app)
         {
             app.AddComponent<App>("app");
         }

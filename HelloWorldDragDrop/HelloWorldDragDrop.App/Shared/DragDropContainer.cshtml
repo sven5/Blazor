@@ -1,12 +1,13 @@
-﻿@using Services
+﻿@using BlazorDemo.App.Services
 
-<div class="col-sm-3 border" dropzone="move" ondragenter="@(e => OnContainerDragEnter(e))" 
-    ondragover="event.preventDefault();" ondragleave="@(e => OnContainerDragLeave(e))" 
-    ondrop="@(e => OnContainerDrop(e, Index))" style="@_highlightDropTargetStyle">
+<div class="col-sm-3 border" dropzone="move" ondragenter="@(e => OnContainerDragEnter(e))"
+     ondragover="event.preventDefault();" ondragleave="@(e => OnContainerDragLeave(e))"
+     ondrop="@(e => OnContainerDrop(e, Index))" style="@_highlightDropTargetStyle">
     @foreach (var item in DragDropHelper.Items.Where(item => item.Index == Index))
     {
         <div draggable="true" class="bm-3" ondragstart="@(e => OnItemDragStart(e, item))">
             <DataItem Model="@item" />
+
         </div>
     }
 </div>
@@ -24,8 +25,9 @@
 
     string _highlightDropTargetStyle = null;
 
-    void OnItemDragStart(UIDragEventArgs e, DragItem dragItem)
+    async void OnItemDragStart(UIDragEventArgs e, DragItem dragItem)
     {
+        //var result = await JSRuntime.Current.InvokeAsync<string>("interopFunctions.setTransferData", e);
         DragDropHelper.Item = dragItem;
     }
 

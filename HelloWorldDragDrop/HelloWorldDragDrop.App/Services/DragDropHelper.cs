@@ -1,4 +1,4 @@
-﻿namespace HelloWorldDragDrop.App.Services
+﻿namespace BlazorDemo.App.Services
 {
     public static class DragDropHelper
     {

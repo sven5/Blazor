@@ -1,8 +1,8 @@
-﻿@using Services
+﻿@inherits ComponentBase
 
 @if (IsPopupOpen)
 {
-<style>
+    <style>
         div.overlay {
             opacity: @(_overlayOpacity.ToString(System.Globalization.CultureInfo.InvariantCulture));
             background: #000;
@@ -13,44 +13,44 @@
             left: 0;
             position: fixed;
         }
-</style>
-<div class="overlay"></div>
-<div class="modal" tabindex="-1" role="dialog" style="display:block;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">@Title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="@Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group has-danger">
-                                <label class="col-form-label" for="@nameof(DataItem.Text)">Demo Text</label>
-                                <input required type="text" id="@nameof(DataItem.Text)" class="form-control" aria-label="Text" bind="@DataItem.Text" placeholder="Enter some text..." />
+    </style>
+    <div class="overlay"></div>
+    <div class="modal" tabindex="-1" role="dialog" style="display:block;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="@Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group has-danger">
+                                    <label class="col-form-label" for="@nameof(DataItem.Text)">Demo Text</label>
+                                    <input required type="text" id="@nameof(DataItem.Text)" class="form-control" aria-label="Text" bind="@DataItem.Text" placeholder="Enter some text..." />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group has-danger">
-                                <label class="col-form-label" for="@nameof(DataItem.Description)">Description</label>
-                                <input type="text" id="@nameof(DataItem.Description)" class="form-control" aria-label="Text" bind="@DataItem.Description" placeholder="Enter a comment..." />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group has-danger">
+                                    <label class="col-form-label" for="@nameof(DataItem.Description)">Description</label>
+                                    <input type="text" id="@nameof(DataItem.Description)" class="form-control" aria-label="Text" bind="@DataItem.Description" placeholder="Enter a comment..." />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="@Save">Save</button>
-                <button type="button" class="btn btn-secondary" onclick="@Close">Cancel</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="@Save">Save</button>
+                    <button type="button" class="btn btn-secondary" onclick="@Close">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 }
 
 @functions {
@@ -75,7 +75,8 @@
     [Parameter]
     DragItem DataItem { get; set; } = new DragItem();
 
-    bool IsPopupOpen
+    [Parameter]
+    protected bool IsPopupOpen
     {
         get
         {
@@ -107,21 +108,16 @@
         }
     }
 
+    void Close()
+    {
+        IsPopupOpen = false;
+    }
+
     void Save()
     {
         // you can add some code for validation and saving the modifications here...
         // ....
         // Close the popup
-        IsPopupOpen = false;
-    }
-
-    public void Open()
-    {
-        IsPopupOpen = true;
-    }
-
-    public void Close()
-    {
         IsPopupOpen = false;
     }
 }

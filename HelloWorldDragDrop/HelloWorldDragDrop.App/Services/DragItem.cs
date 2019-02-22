@@ -1,4 +1,4 @@
-﻿namespace HelloWorldDragDrop.App.Services
+﻿namespace BlazorDemo.App.Services
 {
     /// <summary>
     /// This is a simple Drag drop data item.

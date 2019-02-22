@@ -1,4 +1,7 @@
-﻿@using Services
+﻿@inherits ComponentBase
+
+@using BlazorDemo.Services
+
 <div class="alert alert-primary mt-4" role="alert">
     <strong>@Model.Text</strong>
     <span class="text-nowrap">
@@ -8,5 +11,5 @@
 
 @functions {
     [Parameter]
-    DragItem Model { get;set; }
+    DragItem Model { get; set; }
 }

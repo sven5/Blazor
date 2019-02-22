@@ -1,4 +1,4 @@
-﻿@inherits BlazorLayoutComponent
+﻿@inherits LayoutComponentBase
 
 <div class="sidebar">
     <NavMenu />
@@ -6,7 +6,11 @@
 
 <div class="main">
     <div class="top-row px-4">
-        <a href="https://blazor.net" target="_blank" class="ml-md-auto">About</a>
+        <div class="ml-md-auto">
+            <a href="https://github.com/sven5/Blazor" target="_blank">Source Code</a>
+            &nbsp;|&nbsp;
+            <a href="https://blazor.net" target="_blank">About Blazor</a>
+        </div>
     </div>
 
     <div class="content px-4">
