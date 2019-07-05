@@ -15,7 +15,7 @@ namespace WebApp1
 
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, CustomRequirement requirement)
         {
-            _logger.LogDebug($"Principal's Identity is WindowsIdentity {context.User.Identity.Name}");
+            _logger.LogDebug($"Identity name: {context.User.Identity.Name}");
             context.Succeed(requirement);
             return Task.FromResult(0);
         }
